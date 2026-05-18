@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operación Belgrano - Proyecto Maqueta Escolar</title>
+    <style>
+        /* Paleta de Colores Militares / Tácticos Modernos */
+        :root {
+            --verde-militar: #3b4d3c;
+            --verde-oscuro: #232d24;
+            --gris-balistico: #2d3130;
+            --negro-mate: #1a1c1b;
+            --naranja-alerta: #ff6b35;
+            --texto-claro: #f4f6f4;
+            --texto-apagado: #a2a8a4;
+            --borde-tactico: #4a534c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', Courier, monospace, sans-serif; /* Toque de reporte militar */
+        }
+
+        body {
+            background-color: var(--negro-mate);
+            color: var(--texto-claro);
+            line-height: 1.6;
+        }
+
+        /* Barra de Navegación */
+        header {
+            background-color: var(--verde-oscuro);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid var(--naranja-alerta);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+        }
+
+        nav .logo {
+            color: var(--texto-claro);
+            font-size: 1.3rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        nav .logo span {
+            color: var(--naranja-alerta);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+
+        nav ul li a {
+            color: var(--texto-apagado);
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--naranja-alerta);
+        }
+
+        /* Portada Táctica (Hero) */
+        .hero {
+            background: linear-gradient(rgba(26, 28, 27, 0.85), rgba(26, 28, 27, 0.95)), url('https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+            height: 55vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 1rem;
+            border-bottom: 1px solid var(--borde-tactico);
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            letter-spacing: 3px;
+            color: var(--texto-claro);
+            text-transform: uppercase;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            color: var(--texto-apagado);
+            font-family: Arial, sans-serif;
+        }
+
+        /* Contenedor Principal */
+        .container {
+            max-width: 1100px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            margin-bottom: 5rem;
+            scroll-margin-top: 90px;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: var(--texto-claro);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+        }
+
+        h2::before {
+            content: "■";
+            color: var(--naranja-alerta);
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        p {
+            font-family: Arial, sans-serif; /* Fuente más legible para textos largos */
+            color: #d1d5d2;
+        }
+
+        /* Tarjetas de Bitácora / Grid Estilo Militar */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .card {
+            background-color: var(--gris-balistico);
+            border: 1px solid var(--borde-tactico);
+            border-radius: 4px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: var(--naranja-alerta);
+            transform: translateY(-3px);
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-content h3 {
+            color: var(--naranja-alerta);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+        }
+
+        /* Marcadores para fotos y videos */
+        .media-placeholder {
+            background-color: var(--verde-oscuro);
+            border-bottom: 1px solid var(--borde-tactico);
+            height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--texto-apagado);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        /* Tabla de Datos (Estilo Reporte Técnico) */
+        .table-responsive {
+            overflow-x: auto;
+            margin-top: 1.5rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--gris-balistico);
+            border: 1px solid var(--borde-tactico);
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border: 1px solid var(--borde-tactico);
+            font-size: 0.9rem;
+        }
+
+        th {
+            background-color: var(--verde-militar);
+            color: var(--texto-claro);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        td strong {
+            color: var(--naranja-alerta);
+        }
+
+        tr:nth-child(even) {
+            background-color: rgba(26, 28, 27, 0.5);
+        }
+
+        /* Pie de Página */
+        footer {
+            background-color: var(--negro-mate);
+            color: var(--texto-apagado);
+            text-align: center;
+            padding: 3rem;
+            border-top: 1px solid var(--borde-tactico);
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        footer span {
+            color: var(--texto-claro);
+            font-weight: bold;
+        }
+
+        /* Responsivo */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            nav ul {
+                width: 100%;
+                justify-content: center;
+            }
+            nav ul li {
+                margin: 0 0.6rem;
+            }
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Encabezado Táctico -->
+    <header>
+        <nav>
+            <div class="logo">PROYECTO // <span>ARA BELGRANO</span></div>
+            <ul>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#historia">Historial</a></li>
+                <li><a href="#bitacora">Bitácora</a></li>
+                <li><a href="#multimedia">Archivos</a></li>
+                <li><a href="#escala">Especificaciones</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Portada -->
+    <section class="hero" id="inicio">
+        <h1>Crucero ARA General Belgrano</h1>
+        <p>Registro técnico y bitácora de desarrollo de la maqueta naval a escala. Memoria, soberanía e investigación histórica en el ámbito escolar.</p>
+    </section>
+
+    <!-- Contenedor -->
+    <div class="container">
+
+        <!-- Sección Historia -->
+        <section id="historia">
+            <h2>Historial Operativo y Memoria</h2>
+            <p>El ARA General Belgrano representa uno de los capítulos más profundos de nuestra historia soberana. Originalmente botado en EE.UU. como USS Phoenix (sobreviviente de Pearl Harbor), fue adquirido por la Armada Argentina en 1951.</p>
+            <p style="margin-top: 1rem;">Durante el conflicto de las Islas Malvinas en 1982, el crucero cumplió un rol estratégico clave hasta el 2 de mayo, momento en el cual fue atacado fuera de la zona de exclusión total. Este sitio web y la maqueta construida son un homenaje estricto a los 323 tripulantes que custodian el Mar Argentino.</p>
+        </section>
+
+        <!-- Sección Bitácora de Construcción -->
+        <section id="bitacora">
+            <h2>Bitácora de Fabricación</h2>
+            <p>Reporte del avance cronológico en el astillero escolar.</p>
+            
+            <div class="grid">
+                <!-- Fase 1 -->
+                <div class="card">
+                    <div class="media-placeholder">[ FOTO: PLANOS Y DIMENSIONADO ]</div>
+                    <div class="card-content">
+                        <h3>01 // Planos y Cubicaje</h3>
+                        <p>Análisis de las líneas de agua del crucero y desglose de materiales base para iniciar el modelado del casco.</p>
+                    </div>
+                </div>
+
+                <!-- Fase 2 -->
+                <div class="card">
+                    <div class="media-placeholder">[ FOTO: MONTAJE DEL CASCO ]</div>
+                    <div class="card-content">
+                        <h3>02 // Estructura Alar</h3>
+                        <p>Ensamble de las cuadernas principales y forrado de la estructura para dar la forma hidrodinámica característica.</p>
+                    </div>
+                </div>
+
+                <!-- Fase 3 -->
+                <div class="card">
+                    <div class="media-placeholder">[ FOTO: ARTILLERÍA Y DETALLES ]</div>
+                    <div class="card-content">
+                        <h3>03 // Superestructura</h3>
+                        <p>Montaje del puente de mando, chimeneas, torres de artillería principal de 6" y aplicación del esquema de pintura naval.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección Multimedia -->
+        <section id="multimedia">
+            <h2>Archivos Multimedia</h2>
+            <p>Registros audiovisuales recopilados durante el desarrollo de la unidad.</p>
+            <div class="grid">
+                <div class="card">
+                    <div class="media-placeholder" style="height: 250px;">[ REPRODUCTOR: VIDEO EXPLICATIVO DEL PROYECTO ]</div>
+                    <div class="card-content">
+                        <h3>Video Presentación de Equipo</h3>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="media-placeholder" style="height: 250px;">[ REPRODUCTOR: TIME-LAPSE DE CONSTRUCCIÓN ]</div>
+                    <div class="card-content">
+                        <h3>Proceso Técnico en Detalle</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección Escala e Información Técnica -->
+        <section id="escala">
+            <h2>Especificaciones Técnicas</h2>
+            <p>Cálculo de reducción de escala e ingeniería del modelo:</p>
+            
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Parámetro</th>
+                            <th>Unidad Real</th>
+                            <th>Modelo a Escala</th>
+                            <th>Material de Ingeniería</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Eslora (Largo)</strong></td>
+                            <td>185 metros</td>
+                            <td>[Completar] cm</td>
+                            <td>Madera / Polímeros rígidos</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Manga (Ancho)</strong></td>
+                            <td>18.9 metros</td>
+                            <td>[Completar] cm</td>
+                            <td>Compuestos masillados</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Batería Principal</strong></td>
+                            <td>15 Cañones de 6"/47 cal</td>
+                            <td>Escala 100% fiel</td>
+                            <td>Modelado 3D / Resina</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Pie de Página -->
+    <footer>
+        <p>SISTEMA DE REGISTRO DIGITAL // MALVINAS SOBERANÍA</p>
+        <p style="margin-top: 0.5rem; font-family: Arial, sans-serif;">Desarrollado por el comando: <span>[Integrantes del Grupo]</span></p>
+    </footer>
+
+</body>
+</html>
